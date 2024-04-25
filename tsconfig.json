@@ -1,21 +1,22 @@
 {
+  "include": [".eslintrc.cjs", "prettier.config.mjs"],
   "compilerOptions": {
-    "moduleDetection": "force",
-    "isolatedModules": true,
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
-    "target": "ES2020",
-    "importHelpers": false,
-    "declaration": true,
-    "sourceMap": true,
-    "rootDir": ".",
-    "moduleResolution": "Bundler",
-    "jsx": "react",
-    "esModuleInterop": true,
+    "disableSizeLimit": true,
+    "target": "es2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "checkJs": true,
     "skipLibCheck": true,
-    "noEmit": false,
-    "outDir": "dist"
-  },
-  "include": ["src", "next-env.d.ts"],
-  "exclude": ["node_modules/", "**/*.test.ts"]
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "noUncheckedIndexedAccess": true
+  }
 }
