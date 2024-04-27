@@ -49,15 +49,6 @@ function getDefaultLocaleImpl() {
 }
 const getDefaultLocale = cache(getDefaultLocaleImpl);
 
-// async function receiveRuntimeConfigImpl<L extends string>(
-//   locale: L,
-//   requestMessages: (locale: L) => Promise<Translations>,
-// ) {
-//     return {
-//         now:
-//     }
-// }
-
 type GetConfigImplProps<L extends string, M extends AbstractIntlMessages> = {
   getLocale: () => Promise<L>;
   getNow: () => Promise<Date>;
@@ -72,7 +63,7 @@ export function getConfigImpl<L extends string, M extends AbstractIntlMessages>(
     return initializeConfig({
       locale,
       now: await props.getNow(),
-      timezone: await props.getTimeZone(),
+      timeZone: await props.getTimeZone(),
       messages: await props.requestMessages(locale),
     }) as IntlConfig<M>;
   };

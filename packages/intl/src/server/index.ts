@@ -1,9 +1,10 @@
 import { cache } from "react";
-import { getConfigImpl } from "./server/getConfig";
+import { getConfigImpl } from "./getConfig";
 import { AbstractIntlMessages, initializeConfig } from "use-intl";
-import { getMessagesImpl } from "./server/getMessages";
-import { getTranslationsImpl } from "./server/getTranslations";
-import { getMessageFormatCacheImpl } from "./server/getMessageFormatCache";
+import { getMessagesImpl } from "./getMessages";
+import { getTranslationsImpl } from "./getTranslations";
+import { getMessageFormatCacheImpl } from "./getMessageFormatCache";
+import IntlClientProvider from "./IntlClientProvider";
 
 type MakeConfigProps<T extends AbstractIntlMessages, L extends string> = {
   locale: () => Promise<L>;
@@ -23,6 +24,8 @@ export const makeConfig = async <
   const getTimeZone = cache(props.timeZone);
   const requestMessages = cache(props.requestMessages);
 
+  // i believe most of these caches arent necessary!
+
   const getConfig = cache(
     getConfigImpl({
       getNow,
@@ -37,12 +40,24 @@ export const makeConfig = async <
   const getTranslations = cache(
     getTranslationsImpl<T, L>(getConfig, getMessagesFormatCache),
   );
+  const IntlClientProvider_ = cache(IntlClientProvider(getConfig));
+
+  const getTZ = cache(async () => {
+    const config = await getConfig();
+    return config.timeZone;
+  });
+
+  const getLoc = cache(async () => {
+    const config = await getConfig();
+    return config.locale;
+  });
 
   return {
     getMessages,
     getTranslations,
-    getLocale,
+    getLocale: getLoc,
+    getTimeZone: getTZ,
+    getNow,
+    IntlClientProvider: IntlClientProvider_,
   };
 };
-
-export { pickTranslations } from "./utils/pickTranslations";
