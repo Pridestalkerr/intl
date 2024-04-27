@@ -8,5 +8,18 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "negotiator": "^0.6.3",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "use-intl": "^3.11.3"
+  },
+  "devDependencies": {
+    "@types/negotiator": "^0.6.3",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18",
+    "@types/react-dom": "^18"
+  }
 }
