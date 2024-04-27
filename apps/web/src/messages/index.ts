@@ -1,4 +1,4 @@
-import { pickTranslations } from "@acme/intl";
+import { pickTranslations } from "@acme/intl/utils";
 import { namespace } from "./namespace";
 
 // you can nest these as you please by using your own namespace convention
